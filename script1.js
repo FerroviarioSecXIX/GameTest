@@ -14,6 +14,8 @@ const player = {
 const obstacles = [
     { x: 3 * tileSize, y: 2 * tileSize, width: tileSize, height: tileSize },
     { x: 5 * tileSize, y: 4 * tileSize, width: tileSize, height: tileSize },
+    { x: 20 * tileSize, y: 20 * tileSize, width: tileSize, height: tileSize },
+    { x: 30 * tileSize, y: 30 * tileSize, width: tileSize, height: tileSize },
 ];
 
 function isColliding(a, b) {
