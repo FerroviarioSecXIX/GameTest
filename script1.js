@@ -1,7 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-const tileSize = 50;
+const tileSize = 30;
 const playerSpeed = 10;
 
 const player = {
@@ -42,6 +42,18 @@ function handleInput() {
                 player.x -= playerSpeed;
                 break;
             case 'ArrowRight':
+                player.x += playerSpeed;
+                break;
+            case 'w':
+                player.y -= playerSpeed;
+                break;
+            case 's':
+                player.y += playerSpeed;
+                break;
+            case 'a':
+                player.x -= playerSpeed;
+                break;
+            case 'd':
                 player.x += playerSpeed;
                 break;
         }
