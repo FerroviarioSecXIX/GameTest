@@ -1,0 +1,12 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('D:/game_chatgpt/images/flores.jpg');
+}
+
+canvas {
+    border: 1px solid #fff;
+}
