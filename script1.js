@@ -3,18 +3,20 @@ const ctx = canvas.getContext('2d');
 
 const tileSize = 30;
 const playerSpeed = 10;
+const maxObstacleHits = 10;
 
 const player = {
     x: tileSize,
     y: tileSize,
     width: tileSize,
     height: tileSize,
+    hits: 0,
 };
 
 const obstacles = [
-    { x: 3 * tileSize, y: 2 * tileSize, width: tileSize, height: tileSize },
-    { x: 5 * tileSize, y: 4 * tileSize, width: tileSize, height: tileSize },
-    { x: 9 * tileSize, y: 10 * tileSize, width: tileSize, height: tileSize },
+    { x: 3 * tileSize, y: 2 * tileSize, width: tileSize, height: tileSize, hits: maxObstacleHits },
+    { x: 5 * tileSize, y: 4 * tileSize, width: tileSize, height: tileSize, hits: maxObstacleHits },
+    { x: 9 * tileSize, y: 10 * tileSize, width: tileSize, height: tileSize, hits: maxObstacleHits },
 ];
 
 function isColliding(a, b) {
@@ -60,8 +62,15 @@ function handleInput() {
 
         for (const obstacle of obstacles) {
             if (isColliding(player, obstacle)) {
-                player.x = prevX;
-                player.y = prevY;
+                if (obstacle.hits > 0) {
+                    player.x = prevX;
+                    player.y = prevY;
+                    obstacle.hits -= 1;
+                    player.hits += 1;
+                } else {
+                    player.x = prevX;
+                    player.y = prevY;
+                }
                 break;
             }
         }
@@ -79,8 +88,19 @@ function draw() {
     // Draw obstacles
     ctx.fillStyle = 'red';
     for (const obstacle of obstacles) {
-        ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        if (obstacle.hits > 0) {
+            ctx.fillStyle = 'red';
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        } else {
+            ctx.fillStyle = 'gray';
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        }
     }
+    
+    // Draw hit points
+    ctx.fillStyle = 'black';
+    ctx.font = '24px Arial';
+    ctx.fillText(`Player Hits: ${player.hits}`, 10, 30);
 
     requestAnimationFrame(draw);
 }
