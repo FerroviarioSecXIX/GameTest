@@ -4,7 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url('D:/game_chatgpt/images/flores.jpg');
+    background-color: #333
 }
 
 canvas {
